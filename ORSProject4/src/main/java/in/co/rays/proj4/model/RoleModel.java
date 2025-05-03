@@ -3,13 +3,10 @@ package in.co.rays.proj4.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.management.relation.Role;
+import java.util.ArrayList;
+import java.util.List;
 
 import in.co.rays.proj4.bean.RoleBean;
-import in.co.rays.proj4.bean.UserBean;
-import in.co.rays.proj4.exception.DatabaseException;
 import in.co.rays.proj4.exception.DuplicateRecordException;
 import in.co.rays.proj4.util.JDBCDataSource;
 
@@ -40,10 +37,10 @@ public class RoleModel {
 
 	public void add(RoleBean bean) throws Exception {
 		Connection conn = null;
-		
+
 		RoleBean existBean = findByName(bean.getName());
-		
-		if (existBean !=null) {
+
+		if (existBean != null) {
 			throw new DuplicateRecordException("Login id already exist");
 		}
 
@@ -73,6 +70,7 @@ public class RoleModel {
 		} catch (Exception e) {
 
 			JDBCDataSource.trnRollback(conn);
+			e.printStackTrace();
 		}
 	}
 
@@ -104,10 +102,12 @@ public class RoleModel {
 		} catch (Exception e) {
 
 			JDBCDataSource.trnRollback(conn);
+			e.printStackTrace();
 		}
 	}
 
 	public void delete(long id) throws Exception {
+		
 		Connection conn = null;
 
 		try {
@@ -129,6 +129,7 @@ public class RoleModel {
 
 		} catch (Exception e) {
 			JDBCDataSource.trnRollback(conn);
+			e.printStackTrace();
 		}
 	}
 
@@ -185,5 +186,46 @@ public class RoleModel {
 			bean.setModifiedDatetime(rs.getTimestamp(7));
 		}
 		return bean;
+	}
+
+	public List search(RoleBean bean, int pageNo, int pageSize) throws Exception {
+
+		Connection conn = JDBCDataSource.getConnection();
+
+		StringBuilder sql = new StringBuilder("select * from st_role where 1 = 1");
+
+		if (bean != null) {
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				sql.append(" and name like '" + bean.getName() + "%'");
+			}
+		}
+
+		if (pageSize > 0) {
+			pageNo = (pageNo - 1) * pageSize;
+			sql.append(" limit " + pageNo + "," + pageSize);
+		}
+
+		System.out.println("sql: " + sql.toString());
+
+		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+		ResultSet rs = pstmt.executeQuery();
+
+		List list = new ArrayList();
+
+		while (rs.next()) {
+			bean = new RoleBean();
+
+			bean.setId(rs.getLong(1));
+			bean.setName(rs.getString(2));
+			bean.setDescription(rs.getString(3));
+			bean.setCreatedBy(rs.getString(4));
+			bean.setModifiedBy(rs.getString(5));
+			bean.setCreatedDatetime(rs.getTimestamp(6));
+			bean.setModifiedDatetime(rs.getTimestamp(7));
+
+			list.add(bean);
+		}
+		return list;
 	}
 }

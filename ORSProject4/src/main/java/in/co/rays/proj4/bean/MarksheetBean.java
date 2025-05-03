@@ -33,7 +33,7 @@ public class MarksheetBean extends BaseBean{
 		this.name = name;
 	}
 
-	public int getPhysics() {
+	public Integer getPhysics() {
 		return physics;
 	}
 
@@ -41,7 +41,7 @@ public class MarksheetBean extends BaseBean{
 		this.physics = physics;
 	}
 
-	public int getChemistry() {
+	public Integer getChemistry() {
 		return chemistry;
 	}
 
@@ -49,7 +49,7 @@ public class MarksheetBean extends BaseBean{
 		this.chemistry = chemistry;
 	}
 
-	public int getMaths() {
+	public Integer getMaths() {
 		return maths;
 	}
 

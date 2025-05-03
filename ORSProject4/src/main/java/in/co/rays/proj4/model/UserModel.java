@@ -1,9 +1,10 @@
 package in.co.rays.proj4.model;
 
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.DuplicateRecordException;
@@ -26,7 +27,7 @@ public class UserModel {
 			while (rs.next()) {
 				pk = rs.getInt(1);
 			}
-
+			JDBCDataSource.closeConnection(conn);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,6 +76,7 @@ public class UserModel {
 
 		} catch (Exception e) {
 			JDBCDataSource.trnRollback(conn);
+			e.printStackTrace();
 		}
 
 	}
@@ -113,6 +115,7 @@ public class UserModel {
 
 		} catch (Exception e) {
 			JDBCDataSource.trnRollback(conn);
+			e.printStackTrace();
 		}
 	}
 
@@ -139,6 +142,7 @@ public class UserModel {
 
 		} catch (Exception e) {
 			JDBCDataSource.trnRollback(conn);
+			e.printStackTrace();
 		}
 	}
 
@@ -172,6 +176,7 @@ public class UserModel {
 			bean.setModifiedDatetime(rs.getTimestamp(13));
 
 		}
+		JDBCDataSource.closeConnection(conn);
 		return bean;
 	}
 
@@ -205,6 +210,7 @@ public class UserModel {
 			bean.setModifiedDatetime(rs.getTimestamp(13));
 
 		}
+		JDBCDataSource.closeConnection(conn);
 		return bean;
 	}
 
@@ -239,6 +245,64 @@ public class UserModel {
 			bean.setModifiedDatetime(rs.getTimestamp(13));
 
 		}
+		JDBCDataSource.closeConnection(conn);
 		return bean;
+	}
+
+	public List search(UserBean bean, int pageNo, int pageSize) throws Exception {
+
+		Connection conn = JDBCDataSource.getConnection();
+
+		StringBuilder sql = new StringBuilder("select * from st_user where 1 = 1");
+
+		if (bean != null) {
+			if (bean.getFirstName() != null && bean.getFirstName().length() > 0) {
+				sql.append(" and first_name like '" + bean.getFirstName() + "%'");
+			}
+
+			if (bean.getDob() != null && bean.getDob().getTime() > 0) {
+				sql.append(" and dob like '" + new java.sql.Date(bean.getDob().getTime()) + "%'");
+			}
+			
+			if (bean.getRoleId() > 0) {
+				sql.append(" and role_id = " + bean.getRoleId());
+			}
+		}
+
+		if (pageSize > 0) {
+			pageNo = (pageNo - 1) * pageSize;
+			sql.append(" limit " + pageNo + ", " + pageSize);
+		}
+
+		System.out.println("sql..." + sql.toString());
+
+		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+		ResultSet rs = pstmt.executeQuery();
+
+		List list = new ArrayList();
+
+		while (rs.next()) {
+			bean = new UserBean();
+
+			bean.setId(rs.getLong(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setLogin(rs.getString(4));
+			bean.setPassword(rs.getString(5));
+			bean.setDob(rs.getDate(6));
+			bean.setMobileNo(rs.getString(7));
+			bean.setRoleId(rs.getLong(8));
+			bean.setGender(rs.getString(9));
+			bean.setCreatedBy(rs.getString(10));
+			bean.setModifiedBy(rs.getString(11));
+			bean.setCreatedDatetime(rs.getTimestamp(12));
+			bean.setModifiedDatetime(rs.getTimestamp(13));
+
+			list.add(bean);
+		}
+
+		JDBCDataSource.closeConnection(conn);
+		return list;
 	}
 }
