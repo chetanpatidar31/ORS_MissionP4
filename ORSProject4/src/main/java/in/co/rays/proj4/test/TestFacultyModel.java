@@ -1,13 +1,16 @@
 package in.co.rays.proj4.test;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import in.co.rays.proj4.bean.FacultyBean;
+import in.co.rays.proj4.bean.UserBean;
 import in.co.rays.proj4.exception.RecordNotFoundException;
 import in.co.rays.proj4.model.FacultyModel;
+import in.co.rays.proj4.model.UserModel;
 
 public class TestFacultyModel {
 
@@ -15,9 +18,9 @@ public class TestFacultyModel {
 		testNextPk();
 //		testAdd();
 //		testDelete();
-//		testUpdate();
+		testUpdate();
 //		testFindByPk();
-		testFindByEmail();
+//		testFindByEmail();
 //		testSearch();
 	}
 
@@ -71,7 +74,7 @@ public class TestFacultyModel {
 		bean.setCollegeId(2);
 		bean.setCourseId(1);
 		bean.setDob(sdf.parse("22/09/1999"));
-		bean.setSubjectId(2);
+		bean.setSubjectId(3);
 		bean.setCreatedBy("admin");
 		bean.setModifiedBy("admin");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
@@ -82,8 +85,28 @@ public class TestFacultyModel {
 
 	}
 
-	private static void testFindByPk() {
-		// TODO Auto-generated method stub
+	private static void testFindByPk() throws Exception {
+		FacultyModel model = new FacultyModel();
+
+		FacultyBean bean = model.findByPk(1);
+
+		if (bean != null) {
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getFirstName());
+			System.out.print("\t" + bean.getLastName());
+
+			System.out.print("\t" + bean.getDob());
+			System.out.print("\t" + bean.getMobileNo());
+
+			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+
+		} else {
+			throw new RecordNotFoundException("Id not found");
+		}
 
 	}
 
@@ -94,16 +117,16 @@ public class TestFacultyModel {
 
 		if (bean != null) {
 
-			System.out.println(bean.getId());
-			System.out.print(bean.getFirstName());
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getFirstName());
 			System.out.print("\t" + bean.getLastName());
 			System.out.print("\t" + bean.getDob());
 			System.out.print("\t" + bean.getEmail());
-			System.out.println("\t" + bean.getMobileNo());
-			System.out.println("\t" + bean.getGender());
-			System.out.println("\t" + bean.getCreatedBy());
-			System.out.println("\t" + bean.getModifiedBy());
-			System.out.println("\t" + bean.getCreatedDatetime());
+			System.out.print("\t" + bean.getMobileNo());
+			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
 
 		} else {
@@ -111,8 +134,30 @@ public class TestFacultyModel {
 		}
 	}
 
-	private static void testSearch() {
-		// TODO Auto-generated method stub
+	private static void testSearch() throws Exception {
+		FacultyBean bean = new FacultyBean();
+		FacultyModel model = new FacultyModel();
+
+		List list = model.search(bean, 1, 10);
+
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+			bean = (FacultyBean) it.next();
+
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getFirstName());
+			System.out.print("\t" + bean.getLastName());
+			System.out.print("\t" + bean.getDob());
+			System.out.print("\t" + bean.getEmail());
+			System.out.print("\t" + bean.getMobileNo());
+			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+
+		}
 
 	}
 

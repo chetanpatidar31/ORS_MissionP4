@@ -102,18 +102,31 @@ public class FacultyModel {
 	public void update(FacultyBean bean) throws Exception {
 
 		Connection conn = null;
-
+		
 		CollegeModel collegeModel = new CollegeModel();
-		CollegeBean collegeBean = collegeModel.findByPk(bean.getCollegeId());
-		bean.setCollegeName(collegeBean.getName());
-
 		CourseModel courseModel = new CourseModel();
-		CourseBean courseBean = courseModel.findByPk(bean.getCourseId());
-		bean.setCourseName(courseBean.getName());
-
 		SubjectModel subjectModel = new SubjectModel();
+
+		CollegeBean collegeBean = collegeModel.findByPk(bean.getCollegeId());
+		if (collegeBean != null) {
+		    bean.setCollegeName(collegeBean.getName());
+		} else {
+		    throw new Exception("College not found with ID: " + bean.getCollegeId());
+		}
+
+		CourseBean courseBean = courseModel.findByPk(bean.getCourseId());
+		if (courseBean != null) {
+		    bean.setCourseName(courseBean.getName());
+		} else {
+		    throw new Exception("Course not found with ID: " + bean.getCourseId());
+		}
+
 		SubjectBean subjectBean = subjectModel.findByPk(bean.getSubjectId());
-		bean.setSubjectName(subjectBean.getName());
+		if (subjectBean != null) {
+		    bean.setSubjectName(subjectBean.getName());
+		} else {
+		    throw new Exception("Subject not found with ID: " + bean.getSubjectId());
+		}
 
 		try {
 			conn = JDBCDataSource.getConnection();
@@ -204,10 +217,10 @@ public class FacultyModel {
 			bean.setMobileNo(rs.getString(6));
 			bean.setEmail(rs.getString(7));
 			bean.setCollegeId(rs.getLong(8));
-			bean.setCourseId(rs.getLong(9));
-			bean.setSubjectId(rs.getLong(10));
-			bean.setCollegeName(rs.getString(11));
-			bean.setCourseName(rs.getString(12));
+			bean.setCollegeName(rs.getString(9));
+			bean.setCourseId(rs.getLong(10));
+			bean.setCourseName(rs.getString(11));
+			bean.setSubjectId(rs.getLong(12));
 			bean.setSubjectName(rs.getString(13));
 			bean.setCreatedBy(rs.getString(14));
 			bean.setModifiedBy(rs.getString(15));
@@ -242,10 +255,10 @@ public class FacultyModel {
 			bean.setMobileNo(rs.getString(6));
 			bean.setEmail(rs.getString(7));
 			bean.setCollegeId(rs.getLong(8));
-			bean.setCourseId(rs.getLong(9));
-			bean.setSubjectId(rs.getLong(10));
-			bean.setCollegeName(rs.getString(11));
-			bean.setCourseName(rs.getString(12));
+			bean.setCollegeName(rs.getString(9));
+			bean.setCourseId(rs.getLong(10));
+			bean.setCourseName(rs.getString(11));
+			bean.setSubjectId(rs.getLong(12));
 			bean.setSubjectName(rs.getString(13));
 			bean.setCreatedBy(rs.getString(14));
 			bean.setModifiedBy(rs.getString(15));
@@ -327,10 +340,10 @@ public class FacultyModel {
 			bean.setMobileNo(rs.getString(6));
 			bean.setEmail(rs.getString(7));
 			bean.setCollegeId(rs.getLong(8));
-			bean.setCourseId(rs.getLong(9));
-			bean.setSubjectId(rs.getLong(10));
-			bean.setCollegeName(rs.getString(11));
-			bean.setCourseName(rs.getString(12));
+			bean.setCollegeName(rs.getString(9));
+			bean.setCourseId(rs.getLong(10));
+			bean.setCourseName(rs.getString(11));
+			bean.setSubjectId(rs.getLong(12));
 			bean.setSubjectName(rs.getString(13));
 			bean.setCreatedBy(rs.getString(14));
 			bean.setModifiedBy(rs.getString(15));

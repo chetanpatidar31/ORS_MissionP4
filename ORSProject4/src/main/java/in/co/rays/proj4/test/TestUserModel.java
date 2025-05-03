@@ -15,7 +15,7 @@ public class TestUserModel {
 	public static void main(String[] args) throws Exception {
 		testNextPk();
 //		testAdd();
-//		testUpdate();
+		testUpdate();
 //		testDelete();
 //		testfindByPk();
 //		testFindByLogin();
