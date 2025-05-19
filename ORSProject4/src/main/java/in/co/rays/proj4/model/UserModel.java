@@ -214,7 +214,7 @@ public class UserModel {
 		return bean;
 	}
 
-	public UserBean findByAuthenticate(String login, String password) throws Exception {
+	public UserBean authenticate(String login, String password) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();
 

@@ -13,9 +13,9 @@ public class TestCollegeModel {
 
 	public static void main(String[] args) throws Exception {
 		testNextPk();
-//		testAdd();
+		testAdd();
 //		testUpdate();
-		testDelete();
+//		testDelete();
 //		testFindByPk();
 //		testFindByName();
 //		testSearch();

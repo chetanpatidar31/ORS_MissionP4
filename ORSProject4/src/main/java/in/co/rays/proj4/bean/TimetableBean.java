@@ -1,17 +1,29 @@
 package in.co.rays.proj4.bean;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 //8
 public class TimetableBean extends BaseBean{
 
 	private String semester;
 	private String description;
-	private Timestamp examDate;
-	private Timestamp examTime;
+	private Date examDate;
+	private String examTime;
+	private long courseId;
 	private String courseName;
 	private long subjectId;
 	private String subjectName;
+
+	
+	
+	public long getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(long courseId) {
+		this.courseId = courseId;
+	}
 
 	public String getSemester() {
 		return semester;
@@ -29,19 +41,19 @@ public class TimetableBean extends BaseBean{
 		this.description = description;
 	}
 
-	public Timestamp getExamDate() {
+	public Date getExamDate() {
 		return examDate;
 	}
 
-	public void setExamDate(Timestamp examDate) {
+	public void setExamDate(Date examDate) {
 		this.examDate = examDate;
 	}
 
-	public Timestamp getExamTime() {
+	public String getExamTime() {
 		return examTime;
 	}
 
-	public void setExamTime(Timestamp examTime) {
+	public void setExamTime(String examTime) {
 		this.examTime = examTime;
 	}
 

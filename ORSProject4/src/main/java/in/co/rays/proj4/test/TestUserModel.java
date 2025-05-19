@@ -19,7 +19,7 @@ public class TestUserModel {
 //		testDelete();
 //		testfindByPk();
 //		testFindByLogin();
-//		testFindByAuthenticate();
+//		testAuthenticate();
 //		testSearch();
 	}
 
@@ -129,10 +129,10 @@ public class TestUserModel {
 
 	}
 
-	private static void testFindByAuthenticate() throws Exception {
+	private static void testAuthenticate() throws Exception {
 		UserModel model = new UserModel();
 
-		UserBean bean = model.findByAuthenticate("nitin@gmail.com", "12345");
+		UserBean bean = model.authenticate("nitin@gmail.com", "12345");
 
 		if (bean != null) {
 			System.out.println(bean.getId());

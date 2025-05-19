@@ -12,6 +12,15 @@ public class UserBean extends BaseBean {
 	private String mobileNo;
 	private long roleId;
 	private String gender;
+	private String confirmPassword;
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -77,4 +86,5 @@ public class UserBean extends BaseBean {
 		this.gender = gender;
 	}
 
+	
 }

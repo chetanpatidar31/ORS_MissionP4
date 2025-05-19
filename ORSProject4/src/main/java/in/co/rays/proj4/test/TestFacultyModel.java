@@ -18,8 +18,8 @@ public class TestFacultyModel {
 		testNextPk();
 //		testAdd();
 //		testDelete();
-		testUpdate();
-//		testFindByPk();
+//		testUpdate();
+		testFindByPk();
 //		testFindByEmail();
 //		testSearch();
 	}
@@ -94,16 +94,21 @@ public class TestFacultyModel {
 			System.out.print(bean.getId());
 			System.out.print("\t" + bean.getFirstName());
 			System.out.print("\t" + bean.getLastName());
-
 			System.out.print("\t" + bean.getDob());
-			System.out.print("\t" + bean.getMobileNo());
-
 			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getEmail());
+			System.out.print("\t" + bean.getMobileNo());
+			System.out.print("\t" + bean.getCollegeId());
+			System.out.print("\t" + bean.getCollegeName());
+			System.out.print("\t" + bean.getCourseId());
+			System.out.print("\t" + bean.getCourseName());
+			System.out.print("\t" + bean.getSubjectId());
+			System.out.print("\t" + bean.getSubjectName());
 			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
 			System.out.println("\t" + bean.getModifiedDatetime());
-
+			
 		} else {
 			throw new RecordNotFoundException("Id not found");
 		}
@@ -121,9 +126,15 @@ public class TestFacultyModel {
 			System.out.print("\t" + bean.getFirstName());
 			System.out.print("\t" + bean.getLastName());
 			System.out.print("\t" + bean.getDob());
+			System.out.print("\t" + bean.getGender());
 			System.out.print("\t" + bean.getEmail());
 			System.out.print("\t" + bean.getMobileNo());
-			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getCollegeId());
+			System.out.print("\t" + bean.getCollegeName());
+			System.out.print("\t" + bean.getCourseId());
+			System.out.print("\t" + bean.getCourseName());
+			System.out.print("\t" + bean.getSubjectId());
+			System.out.print("\t" + bean.getSubjectName());
 			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
@@ -149,9 +160,15 @@ public class TestFacultyModel {
 			System.out.print("\t" + bean.getFirstName());
 			System.out.print("\t" + bean.getLastName());
 			System.out.print("\t" + bean.getDob());
+			System.out.print("\t" + bean.getGender());
 			System.out.print("\t" + bean.getEmail());
 			System.out.print("\t" + bean.getMobileNo());
-			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getCollegeId());
+			System.out.print("\t" + bean.getCollegeName());
+			System.out.print("\t" + bean.getCourseId());
+			System.out.print("\t" + bean.getCourseName());
+			System.out.print("\t" + bean.getSubjectId());
+			System.out.print("\t" + bean.getSubjectName());
 			System.out.print("\t" + bean.getCreatedBy());
 			System.out.print("\t" + bean.getModifiedBy());
 			System.out.print("\t" + bean.getCreatedDatetime());
