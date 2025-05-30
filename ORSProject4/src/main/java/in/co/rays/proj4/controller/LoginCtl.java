@@ -1,4 +1,4 @@
-package in.co.rays.proj4.controller;
+ package in.co.rays.proj4.controller;
 
 import java.io.IOException;
 
@@ -112,8 +112,7 @@ public class LoginCtl extends BaseCtl {
 		if (OP_SIGN_UP.equalsIgnoreCase(op)) {
 			ServletUtility.redirect(ORSView.USER_REGISTRATION_CTL, request, response);
 		}
-		System.out.println("operation : " + op);
-		System.out.println("loginCtl post method");
+		
 	}
 
 	@Override

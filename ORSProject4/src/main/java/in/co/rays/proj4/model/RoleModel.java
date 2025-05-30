@@ -188,6 +188,10 @@ public class RoleModel {
 		return bean;
 	}
 
+	public List list() throws Exception {
+		return search(null, 0, 0);
+	}
+	
 	public List search(RoleBean bean, int pageNo, int pageSize) throws Exception {
 
 		Connection conn = JDBCDataSource.getConnection();

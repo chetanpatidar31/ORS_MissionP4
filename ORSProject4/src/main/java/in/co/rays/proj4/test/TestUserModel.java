@@ -15,12 +15,12 @@ public class TestUserModel {
 	public static void main(String[] args) throws Exception {
 		testNextPk();
 //		testAdd();
-		testUpdate();
+//		testUpdate();
 //		testDelete();
 //		testfindByPk();
 //		testFindByLogin();
 //		testAuthenticate();
-//		testSearch();
+		testSearch();
 	}
 
 	private static void testNextPk() {
@@ -73,7 +73,8 @@ public class TestUserModel {
 
 	private static void testDelete() throws Exception {
 		UserModel model = new UserModel();
-		model.delete(2);
+		UserBean bean = new UserBean();
+		model.delete(bean);
 	}
 
 	private static void testfindByPk() throws Exception {

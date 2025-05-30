@@ -32,12 +32,12 @@ public class TestTimetableModel {
 		TimetableBean bean = new TimetableBean();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-		bean.setSemester("4th");
+		bean.setSemester("16th");
 		bean.setDescription("exam timetable");
 		bean.setExamDate(sdf.parse("2023/04/02"));
 		bean.setExamTime("9 to 12");
-		bean.setCourseId(1);
-		bean.setSubjectId(1);
+		bean.setCourseId(11);
+		bean.setSubjectId(1003);
 		bean.setCreatedBy("root");
 		bean.setModifiedBy("root");
 		bean.setCreatedDatetime(new Timestamp(new Date().getTime()));
@@ -120,7 +120,7 @@ public class TestTimetableModel {
 		TimetableBean bean = new TimetableBean();
 		TimetableModel model = new TimetableModel();
 
-		List list = model.search(bean, 1, 10);
+		List list = model.search(bean, 2, 10);
 
 		Iterator it = list.iterator();
 

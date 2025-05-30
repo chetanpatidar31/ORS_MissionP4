@@ -1,6 +1,7 @@
 package in.co.rays.proj4.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import in.co.rays.proj4.bean.BaseBean;
 import in.co.rays.proj4.bean.RoleBean;
 import in.co.rays.proj4.bean.UserBean;
+import in.co.rays.proj4.exception.ApplicationException;
+import in.co.rays.proj4.model.RoleModel;
 import in.co.rays.proj4.model.UserModel;
 import in.co.rays.proj4.util.DataUtility;
 import in.co.rays.proj4.util.DataValidator;
@@ -17,6 +20,19 @@ import in.co.rays.proj4.util.ServletUtility;
 
 @WebServlet(name = "UserCtl", urlPatterns = { "/ctl/UserCtl" })
 public class UserCtl extends BaseCtl {
+
+	@Override
+	protected void preload(HttpServletRequest request) {
+
+		RoleModel rModel = new RoleModel();
+
+		try {
+			List l = rModel.list();
+			request.setAttribute("rlist", l);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	protected boolean validate(HttpServletRequest request) {
@@ -71,7 +87,7 @@ public class UserCtl extends BaseCtl {
 		if (DataValidator.isNull(request.getParameter("mobileNo"))) {
 			request.setAttribute("mobileNo", "mobileNo is required");
 			isValid = false;
-		}else if (!DataValidator.isMobileNo(request.getParameter("mobileNo"))) {
+		} else if (!DataValidator.isMobileNo(request.getParameter("mobileNo"))) {
 			request.setAttribute("mobileNo", "Mobile No. contain 10 Digits & Series start with 6-9");
 			isValid = false;
 		}
@@ -86,12 +102,12 @@ public class UserCtl extends BaseCtl {
 
 		return isValid;
 	}
-	
+
 	@Override
 	protected BaseBean populateBean(HttpServletRequest request) {
 		UserBean bean = new UserBean();
 
-		bean.setRoleId(RoleBean.STUDENT);
+		bean.setRoleId(DataUtility.getLong(request.getParameter("roleId")));
 
 		bean.setId(DataUtility.getLong(request.getParameter("id")));
 		bean.setFirstName(DataUtility.getString(request.getParameter("firstName")));
@@ -110,6 +126,21 @@ public class UserCtl extends BaseCtl {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		UserModel model = new UserModel();
+
+		long id = DataUtility.getLong(request.getParameter("id"));
+
+		if (id != 0 && id > 0) {
+			UserBean bean;
+			try {
+				bean = model.findByPk(id);
+				ServletUtility.setBean(bean, request);
+			} catch (Exception e) {
+				ServletUtility.handleException(e, request, response);
+
+			}
+		}
 		ServletUtility.forward(getView(), request, response);
 	}
 
@@ -118,17 +149,25 @@ public class UserCtl extends BaseCtl {
 			throws ServletException, IOException {
 
 		String op = DataUtility.getString(request.getParameter("operation"));
+		long id = DataUtility.getLong(request.getParameter("id"));
 
 		UserBean bean = new UserBean();
 		UserModel model = new UserModel();
 
 		bean = (UserBean) populateBean(request);
 
-		if (OP_SAVE.equalsIgnoreCase(op)) {
+		if (OP_SAVE.equalsIgnoreCase(op) || OP_UPDATE.equalsIgnoreCase(op)) {
 			try {
-				model.add(bean);
-				ServletUtility.setBean(bean, request);
-				ServletUtility.setSuccessMessage("User Add Successfully", request);
+				if (id > 0) {
+					model.update(bean);
+					ServletUtility.setBean(bean, request);
+					ServletUtility.setSuccessMessage("User is successfully Updated", request);
+				} else {
+					model.add(bean);
+					ServletUtility.setBean(bean, request);
+					ServletUtility.setSuccessMessage("User is Add Successfully", request);
+				}
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

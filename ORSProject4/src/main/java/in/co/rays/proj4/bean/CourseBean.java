@@ -31,4 +31,16 @@ public class CourseBean extends BaseBean{
 		this.description = description;
 	}
 
+	@Override
+	public String getkey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

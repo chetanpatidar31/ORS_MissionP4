@@ -279,4 +279,8 @@ public class StudentModel {
 		JDBCDataSource.closeConnection(conn);
 		return list;
 	}
+	
+	public List list() throws Exception {
+		return search(null, 0, 0);
+	}
 }

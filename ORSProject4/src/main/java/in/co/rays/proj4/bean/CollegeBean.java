@@ -49,4 +49,16 @@ public class CollegeBean extends BaseBean{
 		this.phoneNo = phoneNo;
 	}
 
+	@Override
+	public String getkey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

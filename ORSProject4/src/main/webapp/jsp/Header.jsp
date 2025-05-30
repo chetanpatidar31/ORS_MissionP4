@@ -75,6 +75,9 @@
 					href="<%=ORSView.TIMETABLE_CTL%>">Add TimeTable</b></a> | <a
 					href="<%=ORSView.TIMETABLE_LIST_CTL%>">TimeTable List</b></a> | <a
 					target="blank" href="<%=ORSView.JAVA_DOC_VIEW%>">Java Doc</b></a> <%
+ 	} else if (userBean.getRoleId() == RoleBean.FACULTY) {
+ %> | <a href="<%=ORSView.USER_CTL%>">Add User</b></a> | <a
+					href="<%=ORSView.USER_LIST_CTL%>">User List</b></a> | <%
  	}
  %>
 

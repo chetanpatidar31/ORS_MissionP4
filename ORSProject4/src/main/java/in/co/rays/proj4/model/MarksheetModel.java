@@ -31,16 +31,16 @@ public class MarksheetModel {
 		return pk + 1;
 	}
 
-	public void add(MarksheetBean bean) throws Exception {
-
+	public long add(MarksheetBean bean) throws Exception {
+		int pk = nextPk();
 		Connection conn = null;
 
 		StudentModel sModel = new StudentModel();
 		StudentBean studentbean = sModel.findByPk(bean.getStudentId());
 		String studentname = (studentbean.getFirstName() + " " + studentbean.getLastName());
-
+		
 		MarksheetBean duplicateRollNo = findByRollNo(bean.getRollNo());
-
+		
 		if (duplicateRollNo != null) {
 			throw new DuplicateRecordException("RollNo already exists");
 		}
@@ -74,6 +74,7 @@ public class MarksheetModel {
 			JDBCDataSource.trnRollback(conn);
 			e.printStackTrace();
 		}
+		return pk;
 	}
 
 	public void update(MarksheetBean bean) throws Exception {
@@ -251,6 +252,10 @@ public class MarksheetModel {
 		rs.close();
 		JDBCDataSource.closeConnection(conn);
 		return list;
+	}
+	
+	public List list() throws Exception {
+		return search(null, 0, 0);
 	}
 
 }

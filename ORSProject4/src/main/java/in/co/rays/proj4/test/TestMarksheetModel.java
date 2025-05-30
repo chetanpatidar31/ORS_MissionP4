@@ -19,7 +19,33 @@ public class TestMarksheetModel {
 //		testDelete();
 //		testFindByPk();
 //		testFindByRollNo();
-		testSearch();
+//		testSearch();
+		testList();
+	}
+
+	private static void testList() throws Exception {
+		MarksheetModel model = new MarksheetModel();
+		MarksheetBean bean = new MarksheetBean();
+		List list = new ArrayList();
+		list = model.list();
+		if (list.size() < 0) {
+			System.out.println("Test search fail");
+		}
+		Iterator it = list.iterator();
+		while (it.hasNext()) {
+			bean = (MarksheetBean) it.next();
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getRollNo());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getPhysics());
+			System.out.print("\t" + bean.getChemistry());
+			System.out.print("\t" + bean.getMaths());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		}
+		
 	}
 
 	private static void testNextPk() {

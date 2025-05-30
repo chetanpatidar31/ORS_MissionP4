@@ -18,7 +18,31 @@ public class TestRoleModel {
 //		testDelete();
 //		testFindByPk();
 //		testfindByName();
-		testSearch();
+//		testSearch();
+		testList();
+	}
+
+	private static void testList() throws Exception {
+		RoleModel model = new RoleModel();
+		RoleBean bean = new RoleBean();
+
+//		bean.setName("Student");
+
+		List list = model.list();
+		Iterator it = list.iterator();
+
+		while (it.hasNext()) {
+			bean = (RoleBean) it.next();
+
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getName());
+			System.out.print("\t" + bean.getDescription());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		}
+		
 	}
 
 	private static void testNextPk() {
@@ -108,7 +132,7 @@ public class TestRoleModel {
 
 //		bean.setName("Student");
 
-		List list = model.search(bean, 1, 10);
+		List list = model.search(bean, 0, 0);
 		Iterator it = list.iterator();
 
 		while (it.hasNext()) {

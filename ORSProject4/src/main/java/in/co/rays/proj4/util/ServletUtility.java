@@ -82,7 +82,6 @@ public class ServletUtility {
 		// System.out.println("servlet ulitity error ctl------------>");
 		request.setAttribute("exception", e);
 //        response.sendRedirect(ORSView.ERROR_CTL);
-//        
 	}
 
 	/**

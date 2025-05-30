@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<link rel="icon" type="image/png" href="<%=ORSView.APP_CONTEXT%>/img/customLogo.jpg"
+	sizes="16*16" />
 <title>Welcome Page</title>
 </head>
 <body>

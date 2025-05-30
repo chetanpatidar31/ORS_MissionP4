@@ -17,12 +17,41 @@ public class TestStudentModel {
 
 	public static void main(String[] args) throws Exception {
 		testNextPk();
-		testAdd();
+//		testAdd();
 //		testUpdate();
 //		testDelete();
 //		testFindByPk();
 //		testFindByEmail();
 //		testSearch();
+		testList();
+	}
+
+
+	private static void testList() throws Exception {
+		StudentModel model = new StudentModel();
+		StudentBean bean = new StudentBean();
+
+		List list = model.list();
+		Iterator it = list.iterator();
+		
+		while(it.hasNext()) {
+			bean =(StudentBean) it.next();
+			
+			System.out.print(bean.getId());
+			System.out.print("\t" + bean.getFirstName());
+			System.out.print("\t" + bean.getLastName());
+			System.out.print("\t" + bean.getDob());
+			System.out.print("\t" + bean.getGender());
+			System.out.print("\t" + bean.getMobileNo());
+			System.out.print("\t" + bean.getEmail());
+			System.out.print("\t" + bean.getCollegeId());
+			System.out.print("\t" + bean.getCollegeName());
+			System.out.print("\t" + bean.getCreatedBy());
+			System.out.print("\t" + bean.getModifiedBy());
+			System.out.print("\t" + bean.getCreatedDatetime());
+			System.out.println("\t" + bean.getModifiedDatetime());
+		}
+
 	}
 
 

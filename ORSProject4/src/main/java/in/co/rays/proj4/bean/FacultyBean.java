@@ -114,4 +114,16 @@ public class FacultyBean extends BaseBean{
 		this.subjectName = subjectName;
 	}
 
+	@Override
+	public String getkey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

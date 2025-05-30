@@ -119,7 +119,7 @@ public class UserModel {
 		}
 	}
 
-	public void delete(long id) throws Exception {
+	public void delete(UserBean bean) throws Exception {
 
 		Connection conn = null;
 
@@ -130,7 +130,7 @@ public class UserModel {
 
 			PreparedStatement pstmt = conn.prepareStatement("delete from st_user where id=?");
 
-			pstmt.setLong(1, id);
+			pstmt.setLong(1, bean.getId());
 
 			int i = pstmt.executeUpdate();
 
@@ -260,12 +260,17 @@ public class UserModel {
 				sql.append(" and first_name like '" + bean.getFirstName() + "%'");
 			}
 
-			if (bean.getDob() != null && bean.getDob().getTime() > 0) {
-				sql.append(" and dob like '" + new java.sql.Date(bean.getDob().getTime()) + "%'");
+			if (bean.getDob() != null) {
+				System.out.println("search method in if of dob");
+				sql.append(" and dob = '" + new java.sql.Date(bean.getDob().getTime()) + "'");
 			}
-			
+
 			if (bean.getRoleId() > 0) {
 				sql.append(" and role_id = " + bean.getRoleId());
+			}
+
+			if (bean.getLogin() != null && bean.getLogin().length() > 0) {
+				sql.append(" and login like '" + bean.getLogin() + "%'");
 			}
 		}
 
@@ -304,5 +309,9 @@ public class UserModel {
 
 		JDBCDataSource.closeConnection(conn);
 		return list;
+	}
+
+	public List list() throws Exception {
+		return search(null, 0, 0);
 	}
 }
