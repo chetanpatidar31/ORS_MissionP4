@@ -1,6 +1,7 @@
 package in.co.rays.proj4.bean;
 
 import java.util.Date;
+
 //2
 public class UserBean extends BaseBean {
 
@@ -88,15 +89,14 @@ public class UserBean extends BaseBean {
 
 	@Override
 	public String getkey() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return id + "";
 	}
 
 	@Override
 	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return firstName + " " + lastName;
 	}
 
-	
 }

@@ -42,6 +42,7 @@
 			%>
 
 			<span style="color: green"><%=ServletUtility.getSuccessMessage(request)%></span>
+			<input type = "hidden" name = "id" value="<%= DataUtility.getString(String.valueOf(bean.getId()))%>">
 
 			<table>
 				<tr>
@@ -159,7 +160,7 @@
 					<th style="padding: 3px"></th>
 					<td></td>
 				</tr>
-
+				<%if(!(bean != null && bean.getId() > 0)){ %>
 				<tr>
 					<th>Confirm Password <span style="color: red">*</span> :
 					</th>
@@ -168,7 +169,7 @@
 						value="<%=DataUtility.getStringData(bean.getConfirmPassword())%>"><font
 						color="red"><%=ServletUtility.getErrorMessage("confirmPassword", request)%></font></td>
 				</tr>
-
+				<%} %>
 				<tr>
 					<th style="padding: 3px"></th>
 					<td></td>
@@ -178,7 +179,7 @@
 				<tr>
 					<th></th>
 					<td colspan="2">&nbsp; &emsp; <input type="submit"
-						name="operation" value="<%=UserCtl.OP_SAVE%>">
+						name="operation" value="<%=bean != null && bean.getId() > 0 ? UserCtl.OP_UPDATE : UserCtl.OP_SAVE%>">
 
 					</td>
 				</tr>

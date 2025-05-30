@@ -37,6 +37,7 @@ public class UserCtl extends BaseCtl {
 	@Override
 	protected boolean validate(HttpServletRequest request) {
 
+		String op = DataUtility.getString(request.getParameter("operation"));
 		boolean isValid = true;
 
 		if (DataValidator.isNull(request.getParameter("firstName"))) {
@@ -71,12 +72,15 @@ public class UserCtl extends BaseCtl {
 			isValid = false;
 		}
 
-		if (DataValidator.isNull(request.getParameter("confirmPassword"))) {
-			request.setAttribute("confirmPassword", "confirmPassword is required");
-			isValid = false;
-		} else if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
-			request.setAttribute("confirmPassword", "password and confirmpassword must be same");
-			isValid = false;
+		if (DataValidator.isNotNull(op) && !OP_UPDATE.equalsIgnoreCase(op)) {
+
+			if (DataValidator.isNull(request.getParameter("confirmPassword"))) {
+				request.setAttribute("confirmPassword", "confirmPassword is required");
+				isValid = false;
+			} else if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+				request.setAttribute("confirmPassword", "password and confirmpassword must be same");
+				isValid = false;
+			}
 		}
 
 		if (DataValidator.isNull(request.getParameter("gender"))) {
@@ -150,6 +154,7 @@ public class UserCtl extends BaseCtl {
 
 		String op = DataUtility.getString(request.getParameter("operation"));
 		long id = DataUtility.getLong(request.getParameter("id"));
+		System.out.println("id : " + request.getParameter("id"));
 
 		UserBean bean = new UserBean();
 		UserModel model = new UserModel();

@@ -3,7 +3,7 @@ package in.co.rays.proj4.bean;
 import java.util.Date;
 
 //9
-public class FacultyBean extends BaseBean{
+public class FacultyBean extends BaseBean {
 
 	private String firstName;
 	private String lastName;
@@ -116,14 +116,14 @@ public class FacultyBean extends BaseBean{
 
 	@Override
 	public String getkey() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return id + "";
 	}
 
 	@Override
 	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return firstName + " " + lastName;
 	}
 
 }
